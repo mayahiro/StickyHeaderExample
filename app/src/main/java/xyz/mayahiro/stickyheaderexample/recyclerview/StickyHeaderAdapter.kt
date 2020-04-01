@@ -11,6 +11,7 @@ import xyz.mayahiro.stickyheaderexample.R
 import xyz.mayahiro.stickyheaderexample.data.ListData
 import xyz.mayahiro.stickyheaderexample.recyclerview.item.ContentItem
 import xyz.mayahiro.stickyheaderexample.recyclerview.item.HeaderItem
+import xyz.mayahiro.stickyheaderexample.recyclerview.item.StickyHeaderItem
 
 class StickyHeaderAdapter : GroupAdapter<GroupieViewHolder>(), StickyHeaderInterface {
     private val sections = hashMapOf<String, Section>()
@@ -35,7 +36,7 @@ class StickyHeaderAdapter : GroupAdapter<GroupieViewHolder>(), StickyHeaderInter
     // StickyHeaderInterface
     override fun getHeaderPositionForItem(itemPosition: Int): Int {
         return when (val item = getItem(itemPosition)) {
-            is HeaderItem -> itemPosition
+            is StickyHeaderItem -> itemPosition
             else -> {
                 val key = (item as ContentItem).dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE)
                 val section = sections[key]
@@ -58,5 +59,5 @@ class StickyHeaderAdapter : GroupAdapter<GroupieViewHolder>(), StickyHeaderInter
         }
     }
 
-    override fun isHeader(itemPosition: Int): Boolean = getItem(itemPosition) is HeaderItem
+    override fun isHeader(itemPosition: Int): Boolean = getItem(itemPosition) is StickyHeaderItem
 }
