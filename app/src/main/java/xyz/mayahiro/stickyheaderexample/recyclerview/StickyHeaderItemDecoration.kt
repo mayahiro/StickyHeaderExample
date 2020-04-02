@@ -30,9 +30,9 @@ class StickyHeaderItemDecoration(private val listener: StickyHeaderInterface) : 
 
             val contactPoint = it.bottom
 
-            val childInContact = getChildInContact(parent, contactPoint) ?: return
+            val childInContact = getChildInContact(parent, contactPoint)
 
-            if (listener.isHeader(parent.getChildAdapterPosition(childInContact))) {
+            if (childInContact != null && listener.isHeader(parent.getChildAdapterPosition(childInContact))) {
                 childInContact.alpha = 1F
                 moveHeader(c, it, childInContact)
                 return
